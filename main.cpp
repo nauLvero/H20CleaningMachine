@@ -23,6 +23,10 @@ public:
         };
         return isBrushOn;
     };
+    void showBrushState()
+    {
+        cout << "Brush state: " << isBrushOn << endl;
+    };
 };
 class Roller
 {
@@ -54,16 +58,34 @@ private:
 public:
     ;
 };
+class MashineController
+{
+private:
+    vector<Brush> m_brush;
+
+public:
+    MashineController(vector<Brush> p_brush)
+    {
+        m_brush = p_brush;
+    };
+    void showBrushState()
+    {
+        m_brush[0].showBrushState();
+    };
+};
+
 int main()
 {
     Brush b1, b2;
     Roller r1;
-    vector<Brush> v_brush;
+    vector<Brush> brush = {b1, b2};
     vector<Roller> v_roller;
     vector<Sensor> v_Sensor;
-    b1.elementHandler();
-    b2.elementHandler();
-    b2.elementHandler();
-    r1.elementHandler();
+    MashineController m1(brush);
+    m1.showBrushState();
+    // b1.elementHandler();
+    // b2.elementHandler();
+    // b2.elementHandler();
+    // r1.elementHandler();
     return 0;
 }
