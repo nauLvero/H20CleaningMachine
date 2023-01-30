@@ -93,6 +93,7 @@ public:
                 {
                     m_roller[i + 1].elementHandler(true);
                     m_brush[i + 1].elementHandler(true);
+                    break;
                 };
             }
             else if (m_sensor[i].showState() == "off")
