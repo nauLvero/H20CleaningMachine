@@ -11,29 +11,13 @@ public:
     Brush(){};
     virtual bool elementHandler(bool p_handler)
     {
-        isBrushOn = !isBrushOn;
-        cout << "Brush";
-        if (isBrushOn == true)
-        {
-            cout << " turned on" << endl;
-        }
-        else
-        {
-            cout << " turned off" << endl;
-        };
+        isBrushOn = p_handler;
         return isBrushOn;
     };
-    virtual bool showState()
+    virtual string showState()
     {
-        if (isBrushOn)
-        {
-            cout << "Brush is on" << endl;
-        }
-        else
-        {
-            cout << "Brush is off" << endl;
-        };
-        return isBrushOn;
+        // cout << "Brush is ";
+        return isBrushOn ? "on" : "off";
     };
 };
 class Roller
@@ -46,20 +30,13 @@ public:
     virtual bool elementHandler(bool p_handler)
     {
         isRollerOn = p_handler;
-        cout << "Roller";
-        if (isRollerOn == true)
-        {
-            cout << " is on" << endl;
-        }
-        else
-        {
-            cout << " is off" << endl;
-        };
+
         return isRollerOn;
     };
-    virtual bool showState()
+    virtual string showState()
     {
-        return isRollerOn;
+        // cout << "Roller is ";
+        return isRollerOn ? "on" : "off";
     };
 };
 class Sensor
@@ -73,15 +50,10 @@ public:
         isSensorOn = p_handler;
         return isSensorOn;
     };
-    virtual bool showState()
+    virtual string showState()
     {
-        if (isSensorOn)
-        {
-            cout << "Sensor is on" << endl;
-        }
-        else
-            cout << "Sensor is off" << endl;
-        return isSensorOn;
+        // cout << "Sensor is ";
+        return isSensorOn ? "on" : "off";
     };
 };
 class MachineController
@@ -98,30 +70,51 @@ public:
         m_roller = p_roller;
         m_sensor = p_sensor;
     };
-
+    void setSensorVal()
+    {
+        for (int i = 0; i < m_sensor.size(); i++)
+        {
+            bool sensorVal;
+            cout << "Enter sensor " << i + 1 << " value:";
+            cin >> sensorVal; ///  try  catch to add
+            cout << endl;
+            m_sensor[i].elementHandler(sensorVal);
+        };
+    };
     void machineProgram()
     {
-        vector<Sensor>::iterator it_1 = m_sensor.begin();
-        for (it_1; it_1 != m_sensor.end(); it_1++)
+        for (int i = 0; i < m_sensor.size(); i++)
         {
-            cout << "Wywolano petle" << (*it_1).showState() << endl;
+            if (m_sensor[i].showState() == "on")
+            {
+                m_roller[i].elementHandler(true);
+                m_brush[i].elementHandler(true);
+                if (i == (m_sensor.size() - 2))
+                {
+                    m_roller[i + 1].elementHandler(true);
+                    m_brush[i + 1].elementHandler(true);
+                };
+            }
+            else if (m_sensor[i].showState() == "off")
+            {
+                m_roller[i].elementHandler(false);
+                m_brush[i].elementHandler(false);
+            };
         };
+    };
 
-        if (m_sensor[0].showState())
+    virtual void showState()
+    {
+        for (int i = 0; i < m_sensor.size(); i++)
         {
-
-            m_brush[0].elementHandler(true);
-            m_roller[0].elementHandler(true);
-        }
-        else if (!m_sensor[0].showState())
-        {
-            m_brush[0].elementHandler(false);
-            m_roller[0].elementHandler(false);
-        }
-        else
-        {
-            cout << "Error - check Sensor 1" << endl;
-        }
+            cout << "Sensor number " << i + 1 << ": ";
+            cout << m_sensor[i].showState() << endl;
+            cout << "Brush number " << i + 1 << ": ";
+            cout << m_brush[i].showState() << endl;
+            cout << "Roller numeber " << i + 1 << ": ";
+            cout << m_roller[i].showState() << endl;
+            cout << endl;
+        };
     };
 };
 
@@ -134,10 +127,8 @@ int main()
     vector<Roller> roller = {r1, r2, r3};
     vector<Sensor> sensor = {s1, s2, s3};
     MachineController m1(brush, roller, sensor);
+    m1.setSensorVal();
     m1.machineProgram();
-    // b1.elementHandler();
-    // b2.elementHandler();
-    // b2.elementHandler();
-    // r1.elementHandler();
+    m1.showState();
     return 0;
 }
