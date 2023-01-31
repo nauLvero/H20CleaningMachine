@@ -1,6 +1,41 @@
 #include <iostream>
 #include <vector>
+#include "file.hpp"
 using namespace std;
+
+class Velocity
+{
+private:
+    float velocity[3] = {2, 5, 10};
+
+public:
+    void chooseVelocity()
+    {
+        int velocity_option;
+        cout << "Choose roller speed, enter value 1,2,3 (1-low speed, 2-normal, 3-high) " << endl;
+        cout << ":";
+        cin >> velocity_option;
+        cout << endl;
+        switch (velocity_option)
+        {
+        case 1:
+            cout << "Roller speed high " << velocity[0] << " m/min" << endl;
+            break;
+
+        case 2:
+            cout << "Roller speed normal" << velocity[1] << " m/min" << endl;
+            break;
+        case 3:
+            cout << "Roller speed low" << velocity[2] << " m/min" << endl;
+            break;
+        default:
+            cout << "Wrong speed !! Enter value 1,2 or 3" << endl;
+
+            break;
+        }
+        cout << endl;
+    };
+};
 
 class Brush
 {
@@ -24,7 +59,6 @@ class Roller
 {
 private:
     bool isRollerOn = false;
-    float rollerVelocity = 0; //[m/min]
 
 public:
     virtual bool elementHandler(bool p_handler)
@@ -42,7 +76,7 @@ public:
 class Sensor
 {
 private:
-    bool isSensorOn = true;
+    bool isSensorOn;
 
 public:
     virtual bool elementHandler(bool p_handler)
@@ -56,7 +90,8 @@ public:
         return isSensorOn ? "on" : "off";
     };
 };
-class MachineController
+
+class MachineController : public Velocity
 {
 private:
     vector<Brush> m_brush;
@@ -75,7 +110,7 @@ public:
         for (int i = 0; i < m_sensor.size(); i++)
         {
             bool sensorVal;
-            cout << "Enter sensor " << i + 1 << " value:";
+            cout << "Enter sensor " << i + 1 << " value (0 or 1):";
             cin >> sensorVal; ///  try  catch to add
             cout << endl;
             m_sensor[i].elementHandler(sensorVal);
@@ -128,8 +163,12 @@ int main()
     vector<Roller> roller = {r1, r2, r3};
     vector<Sensor> sensor = {s1, s2, s3};
     MachineController m1(brush, roller, sensor);
+    m1.chooseVelocity();
     m1.setSensorVal();
     m1.machineProgram();
     m1.showState();
+
+    // Test t1;
+    // t1.showTest(5);
     return 0;
 }
