@@ -5,7 +5,7 @@
 About:
 Machine clean construction elements - wooden H20 beams.
 
-Machine contain:
+Machine contains:
   -3 position sensors,
   -3 drive rollers,
   -3 brushes.
