@@ -19,14 +19,14 @@ public:
         switch (velocity_option)
         {
         case 1:
-            cout << "Roller speed high " << velocity[0] << " m/min" << endl;
+            cout << "Roller speed low " << velocity[0] << " m/min" << endl;
             break;
 
         case 2:
             cout << "Roller speed normal" << velocity[1] << " m/min" << endl;
             break;
         case 3:
-            cout << "Roller speed low" << velocity[2] << " m/min" << endl;
+            cout << "Roller speed high" << velocity[2] << " m/min" << endl;
             break;
         default:
             cout << "Wrong speed !! Enter value 1,2 or 3" << endl;
