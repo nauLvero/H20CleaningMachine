@@ -3,94 +3,6 @@
 #include "file.hpp"
 using namespace std;
 
-class Velocity
-{
-private:
-    float velocity[3] = {2, 5, 10};
-
-public:
-    void chooseVelocity()
-    {
-        int velocity_option;
-        cout << "Choose roller speed, enter value 1,2,3 (1-low speed, 2-normal, 3-high) " << endl;
-        cout << ":";
-        cin >> velocity_option;
-        cout << endl;
-        switch (velocity_option)
-        {
-        case 1:
-            cout << "Roller speed low " << velocity[0] << " m/min" << endl;
-            break;
-
-        case 2:
-            cout << "Roller speed normal" << velocity[1] << " m/min" << endl;
-            break;
-        case 3:
-            cout << "Roller speed high" << velocity[2] << " m/min" << endl;
-            break;
-        default:
-            cout << "Wrong speed !! Enter value 1,2 or 3" << endl;
-
-            break;
-        }
-        cout << endl;
-    };
-};
-
-class Brush
-{
-private:
-    bool isBrushOn = false;
-
-public:
-    Brush(){};
-    virtual bool elementHandler(bool p_handler)
-    {
-        isBrushOn = p_handler;
-        return isBrushOn;
-    };
-    virtual string showState()
-    {
-        // cout << "Brush is ";
-        return isBrushOn ? "on" : "off";
-    };
-};
-class Roller
-{
-private:
-    bool isRollerOn = false;
-
-public:
-    virtual bool elementHandler(bool p_handler)
-    {
-        isRollerOn = p_handler;
-
-        return isRollerOn;
-    };
-    virtual string showState()
-    {
-        // cout << "Roller is ";
-        return isRollerOn ? "on" : "off";
-    };
-};
-class Sensor
-{
-private:
-    bool isSensorOn;
-
-public:
-    virtual bool elementHandler(bool p_handler)
-    {
-        isSensorOn = p_handler;
-        return isSensorOn;
-    };
-    virtual string showState()
-    {
-        // cout << "Sensor is ";
-        return isSensorOn ? "on" : "off";
-    };
-};
-
 class MachineController : public Velocity
 {
 private:
@@ -110,7 +22,7 @@ public:
         for (int i = 0; i < m_sensor.size(); i++)
         {
             bool sensorVal;
-            cout << "Enter sensor " << i + 1 << " value (0 or 1):";
+            cout << "Wpisz wartosc na czujniku " << i + 1 << " (0 lub 1):";
             cin >> sensorVal; ///  try  catch to add
             cout << endl;
             m_sensor[i].elementHandler(sensorVal);
@@ -141,13 +53,15 @@ public:
 
     virtual void showState()
     {
+        cout << endl;
+        cout << endl;
         for (int i = 0; i < m_sensor.size(); i++)
         {
-            cout << "Sensor number " << i + 1 << ": ";
+            cout << "Czujnik numer " << i + 1 << ": ";
             cout << m_sensor[i].showState() << endl;
-            cout << "Brush number " << i + 1 << ": ";
+            cout << "Szczotka numer " << i + 1 << ": ";
             cout << m_brush[i].showState() << endl;
-            cout << "Roller numeber " << i + 1 << ": ";
+            cout << "Walek napedowy numer " << i + 1 << ": ";
             cout << m_roller[i].showState() << endl;
             cout << endl;
         };
