@@ -9,6 +9,6 @@ bool Sensor::elementHandler(bool p_handler)
 };
 string Sensor::showState()
 {
-    // cout << "Sensor is ";
+
     return isSensorOn ? "on" : "off";
 };

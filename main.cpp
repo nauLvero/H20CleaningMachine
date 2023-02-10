@@ -82,7 +82,5 @@ int main()
     m1.machineProgram();
     m1.showState();
 
-    // Test t1;
-    // t1.showTest(5);
-    return 0;
+       return 0;
 }

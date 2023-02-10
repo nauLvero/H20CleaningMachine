@@ -5,16 +5,6 @@
 
 using namespace std;
 
-// class Test
-// {
-// private:
-//     int test;
-
-// public:
-//     void showTest(int p_test);
-// };
-
-//
 class Velocity
 {
 private:
