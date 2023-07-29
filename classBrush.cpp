@@ -1,5 +1,5 @@
-#include "file.hpp"
 #include <iostream>
+#include "classBrush.hpp"
 using namespace std;
 
 bool Brush::elementHandler(bool p_handler)
