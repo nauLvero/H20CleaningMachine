@@ -6,11 +6,30 @@ void MachineController::setSensorVal()
 {
     for (int i = 0; i < m_sensor.size(); i++)
     {
-        bool sensorVal;
+        string sensorInput;
         cout << "Wpisz wartosc na czujniku " << i + 1 << " (0 lub 1):";
-        cin >> sensorVal; ///  try  catch to add
-        cout << endl;
-        m_sensor[i].elementHandler(sensorVal);
+        cin >> sensorInput;
+        try
+        {
+            if (sensorInput != "0" && sensorInput != "1")
+            {
+                throw 1;
+            };
+        }
+        catch (int exp)
+        {
+            cout << "Nieprawidlowa wartosc, wpisz 1 lub 0" << endl;
+            i--;
+                }
+        ///  try  catch to add
+        if (sensorInput == "1")
+        {
+            m_sensor[i].elementHandler(true);
+        }
+        else if (sensorInput == "0")
+        {
+            m_sensor[i].elementHandler(false);
+        };
     };
 };
 void MachineController::machineProgram()
