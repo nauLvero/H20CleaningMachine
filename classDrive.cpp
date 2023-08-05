@@ -1,14 +1,14 @@
 #include <iostream>
-#include "classRoller.hpp"
+#include "classDrive.hpp"
 using namespace std;
 
-bool Roller::elementHandler(bool p_handler)
+bool Drive::elementHandler(bool p_handler)
 {
     isRollerOn = p_handler;
 
     return isRollerOn;
 };
-string Roller::showState()
+string Drive::showState()
 {
     // cout << "Roller is ";
     return isRollerOn ? "on" : "off";

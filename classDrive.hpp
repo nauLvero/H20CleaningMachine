@@ -2,7 +2,7 @@
 #define ROLLER_HPP
 #include <iostream>
 using namespace std;
-class Roller
+class Drive
 {
 private:
     bool isRollerOn = false;

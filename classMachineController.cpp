@@ -20,8 +20,7 @@ void MachineController::setSensorVal()
         {
             cout << "Nieprawidlowa wartosc, wpisz 1 lub 0" << endl;
             i--;
-                }
-        ///  try  catch to add
+        }
         if (sensorInput == "1")
         {
             m_sensor[i].elementHandler(true);
